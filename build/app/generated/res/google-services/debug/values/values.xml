@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">1064092548801-3fui6bt303um3k6b8n9r4rgq41023tis.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">1064092548801</string>
+    <string name="google_api_key" translatable="false">AIzaSyBNeuHczBh5L9sv7Cv3FUEwoxCrSIbXc_g</string>
+    <string name="google_app_id" translatable="false">1:1064092548801:android:14080f4c8ac731231c5e40</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBNeuHczBh5L9sv7Cv3FUEwoxCrSIbXc_g</string>
+    <string name="google_storage_bucket" translatable="false">asdooochat.appspot.com</string>
+    <string name="project_id" translatable="false">asdooochat</string>
+</resources>

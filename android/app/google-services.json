@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1064092548801",
+    "project_id": "asdooochat",
+    "storage_bucket": "asdooochat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064092548801:android:14080f4c8ac731231c5e40",
+        "android_client_info": {
+          "package_name": "com.example.asdooo_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1064092548801-3fui6bt303um3k6b8n9r4rgq41023tis.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNeuHczBh5L9sv7Cv3FUEwoxCrSIbXc_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1064092548801-3fui6bt303um3k6b8n9r4rgq41023tis.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
