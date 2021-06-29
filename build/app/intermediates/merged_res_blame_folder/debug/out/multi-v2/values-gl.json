@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/muhammad/AndroidStudioProjects/asdooo_chat/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-gl/values-gl.xml",
+            "outputFile": "/home/muhammad/Desktop/asdooo_chat/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-gl/values-gl.xml",
             "map": [
                 {
                     "source": "/home/muhammad/.gradle/caches/transforms-2/files-2.1/2b89b31f05ceb2c14f79672ffe5b2bfe/core-1.1.0/res/values-gl/values-gl.xml",

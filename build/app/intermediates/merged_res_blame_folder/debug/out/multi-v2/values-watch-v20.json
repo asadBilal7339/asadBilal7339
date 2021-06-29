@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/muhammad/AndroidStudioProjects/asdooo_chat/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-watch-v20/values-watch-v20.xml",
+            "outputFile": "/home/muhammad/Desktop/asdooo_chat/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
                     "source": "/home/muhammad/.gradle/caches/transforms-2/files-2.1/588b50281ea3cc9a33968208ac1cc29f/jetified-play-services-auth-16.0.1/res/values-watch-v20/values.xml",

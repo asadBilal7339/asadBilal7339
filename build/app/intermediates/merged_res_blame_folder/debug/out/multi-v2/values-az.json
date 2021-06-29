@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/muhammad/AndroidStudioProjects/asdooo_chat/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-az/values-az.xml",
+            "outputFile": "/home/muhammad/Desktop/asdooo_chat/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-az/values-az.xml",
             "map": [
                 {
                     "source": "/home/muhammad/.gradle/caches/transforms-2/files-2.1/c462518e4defe3bf36a3c08207f21b00/jetified-play-services-basement-17.0.0/res/values-az/values.xml",

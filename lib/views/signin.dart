@@ -71,9 +71,9 @@ class _SignInState extends State<SignIn> {
           : Container(
               padding: EdgeInsets.symmetric(horizontal: 24),
               child: Column(
-
+                mainAxisAlignment: MainAxisAlignment.center,
+                //mainAxisSize: MainAxisSize.min,
                 children: [
-                  Spacer(),
                   Form(
                     key: formKey,
                     child: SingleChildScrollView(
@@ -142,8 +142,9 @@ class _SignInState extends State<SignIn> {
                           borderRadius: BorderRadius.circular(30),
                           gradient: LinearGradient(
                             colors: [
-                              const Color(0xff007EF4),
-                              const Color(0xff2A75BC)
+                              Color(0xffFC2150),
+                              const Color(0xff2A75BC),
+                              Color(0xffFC2150),
                             ],
                           )),
                       width: MediaQuery.of(context).size.width,

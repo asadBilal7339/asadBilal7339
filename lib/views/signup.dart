@@ -64,8 +64,8 @@ class _SignUpState extends State<SignUp> {
       body: isLoading ? Container(child: Center(child: CircularProgressIndicator(),),) :  Container(
         padding: EdgeInsets.symmetric(horizontal: 24),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Spacer(),
             Form(
               key: formKey,
               child: Column(
@@ -112,7 +112,9 @@ class _SignUpState extends State<SignUp> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     gradient: LinearGradient(
-                      colors: [const Color(0xff007EF4), const Color(0xff2A75BC)],
+                      colors: [Color(0xffFC2150),
+                        const Color(0xff2A75BC),
+                        Color(0xffFC2150),],
                     )),
                 width: MediaQuery.of(context).size.width,
                 child: Text(
@@ -167,6 +169,5 @@ class _SignUpState extends State<SignUp> {
         ),
       ),
     );
-    ;
   }
 }

@@ -174,7 +174,8 @@ class _SearchState extends State<Search> {
                           gradient: LinearGradient(
                             colors: [
                               const Color(0x36FFFFFF),
-                              const Color(0x0FFFFFFF)
+                              Colors.pink,
+                              const Color(0x0FFFFFFF),
                             ],
                             begin: FractionalOffset.topLeft,
                             end: FractionalOffset.bottomRight

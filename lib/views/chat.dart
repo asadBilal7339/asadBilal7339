@@ -106,7 +106,8 @@ class _ChatState extends State<Chat> {
                               gradient: LinearGradient(
                                   colors: [
                                     const Color(0x36FFFFFF),
-                                    const Color(0x0FFFFFFF)
+                                    Colors.pink,
+                                    const Color(0x0FFFFFFF),
                                   ],
                                   begin: FractionalOffset.topLeft,
                                   end: FractionalOffset.bottomRight
@@ -163,8 +164,9 @@ class MessageTile extends StatelessWidget {
           bottomRight: Radius.circular(23)),
             gradient: LinearGradient(
               colors: sendByMe ? [
-                const Color(0xff007EF4),
-                const Color(0xff2A75BC)
+              Color(0xffFC2150),
+                const Color(0xff2A75BC),
+                Color(0xffFC2150),
               ]
                   : [
                 const Color(0x1AFFFFFF),
