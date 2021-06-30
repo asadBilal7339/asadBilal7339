@@ -1,4 +1,3 @@
-
 import 'package:asdooo_chat/helper/helperfunctions.dart';
 import 'package:asdooo_chat/helper/theme.dart';
 import 'package:asdooo_chat/services/auth.dart';
@@ -34,22 +33,15 @@ class _SignInState extends State<SignIn> {
         isLoading = true;
       });
 
-      await authService
-          .signInWithEmailAndPassword(
-              emailEditingController.text, passwordEditingController.text)
-          .then((result) async {
-        if (result != null)  {
-          QuerySnapshot userInfoSnapshot =
-              await DatabaseMethods().getUserInfo(emailEditingController.text);
+      await authService.signInWithEmailAndPassword(emailEditingController.text, passwordEditingController.text).then((result) async {
+        if (result != null) {
+          QuerySnapshot userInfoSnapshot = await DatabaseMethods().getUserInfo(emailEditingController.text);
 
           HelperFunctions.saveUserLoggedInSharedPreference(true);
-          HelperFunctions.saveUserNameSharedPreference(
-              userInfoSnapshot.documents[0].data["userName"]);
-          HelperFunctions.saveUserEmailSharedPreference(
-              userInfoSnapshot.documents[0].data["userEmail"]);
+          HelperFunctions.saveUserNameSharedPreference(userInfoSnapshot.documents[0].data["userName"]);
+          HelperFunctions.saveUserEmailSharedPreference(userInfoSnapshot.documents[0].data["userEmail"]);
 
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => ChatRoom()));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ChatRoom()));
         } else {
           setState(() {
             isLoading = false;
@@ -69,6 +61,17 @@ class _SignInState extends State<SignIn> {
               child: Center(child: CircularProgressIndicator()),
             )
           : Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.grey[800], Colors.cyan],
+                  begin: const FractionalOffset(0.0, 0.0),
+                  end: const FractionalOffset(2.5, 0.0),
+                  //stops: [0.0, 2.0],
+                  //tileMode: TileMode.mirror
+                ),
+              ),
               padding: EdgeInsets.symmetric(horizontal: 24),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -81,26 +84,20 @@ class _SignInState extends State<SignIn> {
                         children: [
                           TextFormField(
                             validator: (val) {
-                              return RegExp(
-                                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                      .hasMatch(val)
-                                  ? null
-                                  : "Please Enter Correct Email";
+                              return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(val) ? null : "Please Enter Correct Email";
                             },
                             controller: emailEditingController,
                             style: simpleTextStyle(),
-                            decoration: textFieldInputDecoration("email"),
+                            decoration: textFieldInputDecoration("Email"),
                           ),
                           TextFormField(
                             obscureText: true,
                             validator: (val) {
-                              return val.length > 6
-                                  ? null
-                                  : "Enter Password 6+ characters";
+                              return val.length > 6 ? null : "Enter Password 6+ characters";
                             },
                             style: simpleTextStyle(),
                             controller: passwordEditingController,
-                            decoration: textFieldInputDecoration("password"),
+                            decoration: textFieldInputDecoration("Password"),
                           ),
                         ],
                       ),
@@ -114,14 +111,10 @@ class _SignInState extends State<SignIn> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ForgotPassword()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword()));
                         },
                         child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 4),
+                            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                             child: Text(
                               "Forgot Password?",
                               style: simpleTextStyle(),
@@ -160,14 +153,11 @@ class _SignInState extends State<SignIn> {
                   ),
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 8),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.white),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: Colors.white),
                     width: MediaQuery.of(context).size.width,
                     child: Text(
                       "Sign In with Google",
-                      style:
-                          TextStyle(fontSize: 17, color: CustomTheme.textColor),
+                      style: TextStyle(fontSize: 17, color: CustomTheme.textColor),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -175,7 +165,7 @@ class _SignInState extends State<SignIn> {
                     height: 12,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text(
                         "Don't have account? ",
@@ -187,10 +177,7 @@ class _SignInState extends State<SignIn> {
                         },
                         child: Text(
                           "Register now",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              decoration: TextDecoration.underline),
+                          style: TextStyle(color: Colors.white, fontSize: 16, decoration: TextDecoration.underline),
                         ),
                       ),
                     ],

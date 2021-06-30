@@ -142,6 +142,17 @@ class _SearchState extends State<Search> {
           child: CircularProgressIndicator(),
         ),
       ) :  Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.grey[800], Colors.cyan],
+            begin: const FractionalOffset(0.0, 0.0),
+            end: const FractionalOffset(2.5, 0.0),
+            //stops: [0.0, 2.0],
+            //tileMode: TileMode.mirror
+          ),
+        ),
         child: Column(
           children: [
             Container(
@@ -154,9 +165,9 @@ class _SearchState extends State<Search> {
                       controller: searchEditingController,
                       style: simpleTextStyle(),
                       decoration: InputDecoration(
-                        hintText: "search username ...",
+                        hintText: "Enter Username",
                         hintStyle: TextStyle(
-                          color: Colors.white,
+                          color: Colors.white70,
                           fontSize: 16,
                         ),
                         border: InputBorder.none
@@ -173,18 +184,18 @@ class _SearchState extends State<Search> {
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
-                              const Color(0x36FFFFFF),
-                              Colors.pink,
-                              const Color(0x0FFFFFFF),
+                              const Color(0x99000000),
+                              Colors.grey,
                             ],
                             begin: FractionalOffset.topLeft,
                             end: FractionalOffset.bottomRight
                           ),
-                          borderRadius: BorderRadius.circular(40)
+                          borderRadius: BorderRadius.circular(40),
+                          border: Border.all(color: Colors.white,width: 1),
                         ),
                         padding: EdgeInsets.all(12),
                         child: Image.asset("assets/images/search_white.png",
-                          height: 25, width: 25,)),
+                          height: 25, width: 25,),),
                   )
                 ],
               ),

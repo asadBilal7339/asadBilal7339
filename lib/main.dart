@@ -3,8 +3,15 @@ import 'package:asdooo_chat/helper/authenticate.dart';
 import 'package:asdooo_chat/helper/helperfunctions.dart';
 import 'package:asdooo_chat/views/chatrooms.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 
 void main() {
+  // add these lines
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  /////////////
   runApp(MyApp());
 }
 
@@ -38,8 +45,8 @@ class _MyAppState extends State<MyApp> {
       title: 'FlutterChat',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Color(0xffFC2150),
-        scaffoldBackgroundColor: Color(0xff1F1F1F),
+        primaryColor: Colors.indigoAccent,
+        //scaffoldBackgroundColor: Color(0xff1F1F1F),
         accentColor: Colors.grey,
         fontFamily: "OverpassRegular",
         visualDensity: VisualDensity.adaptivePlatformDensity,

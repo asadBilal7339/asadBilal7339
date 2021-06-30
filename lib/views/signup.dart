@@ -17,8 +17,7 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   TextEditingController emailEditingController = new TextEditingController();
   TextEditingController passwordEditingController = new TextEditingController();
-  TextEditingController usernameEditingController =
-      new TextEditingController();
+  TextEditingController usernameEditingController = new TextEditingController();
 
   AuthService authService = new AuthService();
   DatabaseMethods databaseMethods = new DatabaseMethods();
@@ -27,32 +26,23 @@ class _SignUpState extends State<SignUp> {
   bool isLoading = false;
 
   singUp() async {
-
-    if(formKey.currentState.validate()){
+    if (formKey.currentState.validate()) {
       setState(() {
-
         isLoading = true;
       });
 
-      await authService.signUpWithEmailAndPassword(emailEditingController.text,
-          passwordEditingController.text).then((result){
-            if(result != null){
+      await authService.signUpWithEmailAndPassword(emailEditingController.text, passwordEditingController.text).then((result) {
+        if (result != null) {
+          Map<String, String> userDataMap = {"userName": usernameEditingController.text, "userEmail": emailEditingController.text};
 
-              Map<String,String> userDataMap = {
-                "userName" : usernameEditingController.text,
-                "userEmail" : emailEditingController.text
-              };
+          databaseMethods.addUserInfo(userDataMap);
 
-              databaseMethods.addUserInfo(userDataMap);
+          HelperFunctions.saveUserLoggedInSharedPreference(true);
+          HelperFunctions.saveUserNameSharedPreference(usernameEditingController.text);
+          HelperFunctions.saveUserEmailSharedPreference(emailEditingController.text);
 
-              HelperFunctions.saveUserLoggedInSharedPreference(true);
-              HelperFunctions.saveUserNameSharedPreference(usernameEditingController.text);
-              HelperFunctions.saveUserEmailSharedPreference(emailEditingController.text);
-
-              Navigator.pushReplacement(context, MaterialPageRoute(
-                  builder: (context) => ChatRoom()
-              ));
-            }
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ChatRoom()));
+        }
       });
     }
   }
@@ -61,113 +51,126 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarMain(context),
-      body: isLoading ? Container(child: Center(child: CircularProgressIndicator(),),) :  Container(
-        padding: EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Form(
-              key: formKey,
+      body: isLoading
+          ? Container(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            )
+          : Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.grey, Colors.cyan],
+            begin: const FractionalOffset(0.0, 0.0),
+            end: const FractionalOffset(2.5, 0.0),
+            //stops: [0.0, 2.0],
+            //tileMode: TileMode.mirror
+          ),
+        ),
+              padding: EdgeInsets.symmetric(horizontal: 24),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextFormField(
-                    style: simpleTextStyle(),
-                    controller: usernameEditingController,
-                    validator: (val){
-                      return val.isEmpty || val.length < 3 ? "Enter Username 3+ characters" : null;
-                    },
-                    decoration: textFieldInputDecoration("username"),
+                  Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          style: simpleTextStyle(),
+                          controller: usernameEditingController,
+                          validator: (val) {
+                            return val.isEmpty || val.length < 3 ? "Enter Username 3+ characters" : null;
+                          },
+                          decoration: textFieldInputDecoration("Username"),
+                        ),
+                        TextFormField(
+                          controller: emailEditingController,
+                          style: simpleTextStyle(),
+                          validator: (val) {
+                            return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(val) ? null : "Enter correct email";
+                          },
+                          decoration: textFieldInputDecoration("Email"),
+                        ),
+                        TextFormField(
+                          obscureText: true,
+                          style: simpleTextStyle(),
+                          decoration: textFieldInputDecoration("Password"),
+                          controller: passwordEditingController,
+                          validator: (val) {
+                            return val.length < 6 ? "Enter Password 6+ characters" : null;
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                  TextFormField(
-                    controller: emailEditingController,
-                    style: simpleTextStyle(),
-                    validator: (val){
-                      return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(val) ?
-                          null : "Enter correct email";
-                    },
-                    decoration: textFieldInputDecoration("email"),
+                  SizedBox(
+                    height: 16,
                   ),
-                  TextFormField(
-                    obscureText: true,
-                    style: simpleTextStyle(),
-                    decoration: textFieldInputDecoration("password"),
-                    controller: passwordEditingController,
-                    validator:  (val){
-                      return val.length < 6 ? "Enter Password 6+ characters" : null;
+                  GestureDetector(
+                    onTap: () {
+                      singUp();
                     },
-
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 8),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          gradient: LinearGradient(
+                            colors: [
+                              Color(0xffFC2150),
+                              const Color(0xff2A75BC),
+                              Color(0xffFC2150),
+                            ],
+                          )),
+                      width: MediaQuery.of(context).size.width,
+                      child: Text(
+                        "Sign Up",
+                        style: biggerTextStyle(),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 8),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: Colors.white),
+                    width: MediaQuery.of(context).size.width,
+                    child: Text(
+                      "Sign Up with Google",
+                      style: TextStyle(fontSize: 17, color: CustomTheme.textColor),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        "Already have an account? ",
+                        style: simpleTextStyle(),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          widget.toggleView();
+                        },
+                        child: Text(
+                          "SignIn now",
+                          style: TextStyle(color: Colors.white, fontSize: 16, decoration: TextDecoration.underline),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 40,
+                  )
                 ],
               ),
             ),
-            SizedBox(
-              height: 16,
-            ),
-            GestureDetector(
-              onTap: (){
-                singUp();
-              },
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    gradient: LinearGradient(
-                      colors: [Color(0xffFC2150),
-                        const Color(0xff2A75BC),
-                        Color(0xffFC2150),],
-                    )),
-                width: MediaQuery.of(context).size.width,
-                child: Text(
-                  "Sign Up",
-                  style: biggerTextStyle(),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 8),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30), color: Colors.white),
-              width: MediaQuery.of(context).size.width,
-              child: Text(
-                "Sign Up with Google",
-                style: TextStyle(fontSize: 17, color: CustomTheme.textColor),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Already have an account? ",
-                  style: simpleTextStyle(),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    widget.toggleView();
-                  },
-                  child: Text(
-                    "SignIn now",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        decoration: TextDecoration.underline),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 40,
-            )
-          ],
-        ),
-      ),
     );
   }
 }

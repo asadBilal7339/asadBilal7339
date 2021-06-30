@@ -26,10 +26,7 @@ class _ChatRoomState extends State<ChatRoom> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return ChatRoomsTile(
-                    userName: snapshot.data.documents[index].data['chatRoomId']
-                        .toString()
-                        .replaceAll("_", "")
-                        .replaceAll(Constants.myName, ""),
+                    userName: snapshot.data.documents[index].data['chatRoomId'].toString().replaceAll("_", "").replaceAll(Constants.myName, ""),
                     chatRoomId: snapshot.data.documents[index].data["chatRoomId"],
                   );
                 })
@@ -49,8 +46,7 @@ class _ChatRoomState extends State<ChatRoom> {
     DatabaseMethods().getUserChats(Constants.myName).then((snapshots) {
       setState(() {
         chatRooms = snapshots;
-        print(
-            "we got the data + ${chatRooms.toString()} this is name  ${Constants.myName}");
+        print("we got the data + ${chatRooms.toString()} this is name  ${Constants.myName}");
       });
     });
   }
@@ -66,23 +62,35 @@ class _ChatRoomState extends State<ChatRoom> {
           GestureDetector(
             onTap: () {
               AuthService().signOut();
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => Authenticate()));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Authenticate()));
             },
             child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Icon(Icons.exit_to_app)),
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              alignment: Alignment.center,
+              //child: Icon(Icons.exit_to_app),
+              child: Text('Logout',style: TextStyle(color: Colors.white,fontSize: 16),),
+            ),
           )
         ],
       ),
       body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.grey[800], Colors.cyan],
+            begin: const FractionalOffset(0.0, 0.0),
+            end: const FractionalOffset(2.5, 0.0),
+            //stops: [0.0, 2.0],
+            //tileMode: TileMode.mirror
+          ),
+        ),
         child: chatRoomsList(),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.search),
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Search()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Search()));
         },
       ),
     );
@@ -93,17 +101,18 @@ class ChatRoomsTile extends StatelessWidget {
   final String userName;
   final String chatRoomId;
 
-  ChatRoomsTile({this.userName,@required this.chatRoomId});
+  ChatRoomsTile({this.userName, @required this.chatRoomId});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(
-          builder: (context) => Chat(
-            chatRoomId: chatRoomId,
-          )
-        ));
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Chat(
+                      chatRoomId: chatRoomId,
+                    )));
       },
       child: Container(
         color: Colors.black26,
@@ -113,27 +122,13 @@ class ChatRoomsTile extends StatelessWidget {
             Container(
               height: 30,
               width: 30,
-              decoration: BoxDecoration(
-                  color: CustomTheme.colorAccent,
-                  borderRadius: BorderRadius.circular(30)),
-              child: Text(userName.substring(0, 1),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontFamily: 'OverpassRegular',
-                      fontWeight: FontWeight.w300)),
+              decoration: BoxDecoration(color: CustomTheme.colorAccent, borderRadius: BorderRadius.circular(30)),
+              child: Text(userName.substring(0, 1), textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'OverpassRegular', fontWeight: FontWeight.w300)),
             ),
             SizedBox(
               width: 12,
             ),
-            Text(userName,
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontFamily: 'OverpassRegular',
-                    fontWeight: FontWeight.w300))
+            Text(userName, textAlign: TextAlign.start, style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'OverpassRegular', fontWeight: FontWeight.w300))
           ],
         ),
       ),
